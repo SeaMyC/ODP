@@ -1,5 +1,5 @@
 # ODP
-框架是MVVM模式，使用了Databinding+ViewModel+LiveData+Retrofit+Rxjava+MMKV来搭建
+
 
   ![image](https://github.com/SeaMyC/ODP/blob/master/images/odp.gif)
   
