@@ -1,7 +1,7 @@
 # ODP
-this is nice day
+框架是MVVM模式，使用了Databinding+ViewModel+LiveData+Retrofit+Rxjava+MMKV来搭建
 
-  ![image](https://github.com/SeaMyC/ODP/blob/master/imag/QQ%E5%9B%BE%E7%89%8720181123103453.jpg)
+  ![image](https://github.com/SeaMyC/ODP/blob/master/images/odp.gif)
   
 ## 项目使用Google推荐的JetPack组件来构建
 
