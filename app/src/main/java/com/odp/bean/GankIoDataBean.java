@@ -41,7 +41,8 @@ public class GankIoDataBean {
     }
 
     public String getCreatedAt() {
-        return createdAt;
+        String[] createdAts = createdAt.split("T");
+        return createdAts[0];
     }
 
     public void setCreatedAt(String createdAt) {

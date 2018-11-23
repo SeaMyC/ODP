@@ -56,4 +56,6 @@ dependencies {
 
     // 日志
     implementation 'com.orhanobut:logger:2.2.0'
+    //mmkv 数据存储
+    implementation 'com.tencent:mmkv:1.0.10'
 }

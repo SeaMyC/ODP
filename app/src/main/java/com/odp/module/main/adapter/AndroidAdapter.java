@@ -7,6 +7,8 @@ import com.bumptech.glide.Glide;
 import com.odp.R;
 import com.odp.bean.GankIoDataBean;
 import com.odp.databinding.ItemFragementAndroidBinding;
+import com.odp.util.storage.ODPStorageUtil;
+import com.odp.util.storage.StorageCode;
 
 import java.util.List;
 
@@ -56,14 +58,13 @@ public class AndroidAdapter extends BaseAdapter {
 
         public void bindData(int position) {
             Glide.with(itemBinding.getRoot().getContext())
-                    .load(((GankIoDataBean) datas.get(position)).getImages() == null ? null
+                    .load(((GankIoDataBean) datas.get(position)).getImages() == null
+                            ? ODPStorageUtil.getDefault().getString(StorageCode.Odp.ERROR_IMAGE_URL)
                             : ((GankIoDataBean) datas.get(position)).getImages().get(0))
                     .placeholder(R.drawable.img_default_meizi)
                     .error(R.drawable.load_err)
                     .into(itemBinding.ivWeal);
-            itemBinding.tvTitle.setText(((GankIoDataBean) datas.get(position)).getDesc());
-            itemBinding.tvAuth.setText(((GankIoDataBean) datas.get(position)).getWho());
-            itemBinding.tvDate.setText(((GankIoDataBean) datas.get(position)).getCreatedAt());
+            itemBinding.setAndroidBean((GankIoDataBean) datas.get(position));
         }
     }
 }

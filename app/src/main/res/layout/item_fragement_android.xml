@@ -3,6 +3,13 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="androidBean"
+            type="com.odp.bean.GankIoDataBean"/>
+    </data>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cd_item"
         android:layout_width="match_parent"
@@ -32,9 +39,10 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="15dp"
                 android:layout_toEndOf="@id/iv_weal"
-                android:maxLines="2"
+                android:maxLines="3"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:text="@{androidBean.desc}"
                 tools:text="你好你好你好你好你好你好你好你好你好你好你好你好"/>
 
             <TextView
@@ -43,9 +51,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/tv_title"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
                 android:layout_toEndOf="@id/iv_weal"
                 android:maxLines="2"
+                android:text="@{androidBean.who}"
                 android:textColor="#B46D6868"
                 android:textSize="12sp"
                 tools:text="odp"/>
@@ -59,6 +70,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_margin="15dp"
                 android:maxLines="2"
+                android:text="@{androidBean.createdAt}"
                 android:textColor="#B46D6868"
                 android:textSize="12sp"
                 tools:text="date"/>

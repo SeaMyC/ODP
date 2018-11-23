@@ -8,6 +8,8 @@ import com.odp.databinding.FragmentListBinding;
 import com.odp.module.main.adapter.RecyclerItemDecoration;
 import com.odp.module.main.adapter.WealAdapter;
 import com.odp.module.main.viewmodel.WealViewModel;
+import com.odp.util.storage.ODPStorageUtil;
+import com.odp.util.storage.StorageCode;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,6 +55,8 @@ public class WealFragment extends BaseFragment<FragmentListBinding> {
         viewModel.gankIoDataList.observe(this, bean -> {
             if (bean.getResults() != null) {
                 if (viewModel.isRefresh) {
+                    //存起来 用于其他页面图片无资源时占位
+                    ODPStorageUtil.getDefault().push(StorageCode.Odp.ERROR_IMAGE_URL, bean.getResults().get(0).getUrl());
                     wealAdapter.setAdapterData(bean.getResults());
                     refreshLayout.setRefreshing(false);
                 } else {
