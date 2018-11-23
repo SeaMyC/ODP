@@ -28,6 +28,7 @@ public abstract class ODPViewModel extends ViewModel {
     }
 
     public void getGankList(boolean refresh) {
+
         isRefresh = refresh;
         if (refresh) {
             prePage = 10;
