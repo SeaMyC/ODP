@@ -1,7 +1,7 @@
 package com.odp.module.main.viewmodel;
 
 import com.odp.base.GankTypeEnum;
-import com.odp.http.GankIoDataList;
+import com.odp.bean.GankIoDataList;
 import com.odp.http.HttpServiceClient;
 import com.odp.http.RxSchedulerHelper;
 import com.orhanobut.logger.Logger;

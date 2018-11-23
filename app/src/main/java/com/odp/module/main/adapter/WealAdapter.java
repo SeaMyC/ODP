@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.odp.R;
 import com.odp.databinding.ItemFragementWealBinding;
-import com.odp.http.GankIoDataBean;
+import com.odp.bean.GankIoDataBean;
 
 import java.util.List;
 
@@ -18,12 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * @author ChenHh
  * @time 2018/11/22 14:16
- * @des android 适配器
+ * @des 福利 适配器
  **/
 public class WealAdapter extends BaseAdapter {
 
-    public WealAdapter(List<GankIoDataBean> beans) {
+    public void setAdapterData(List<GankIoDataBean> beans) {
+        datas.clear();
         datas = beans;
+        notifyDataSetChanged();
     }
 
     @Override

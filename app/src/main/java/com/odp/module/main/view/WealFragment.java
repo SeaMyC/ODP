@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.odp.R;
 import com.odp.base.BaseFragment;
-import com.odp.databinding.FragmentWealBinding;
+import com.odp.databinding.FragmentListBinding;
 import com.odp.module.main.adapter.RecyclerItemDecoration;
 import com.odp.module.main.adapter.WealAdapter;
 import com.odp.module.main.viewmodel.WealViewModel;
@@ -22,7 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  * @time 2018/11/2 15:31
  * @des 福利页面
  **/
-public class WealFragment extends BaseFragment<FragmentWealBinding> {
+public class WealFragment extends BaseFragment<FragmentListBinding> {
 
     private WealViewModel viewModel;
     private static WealFragment wealFragment;
@@ -40,7 +40,7 @@ public class WealFragment extends BaseFragment<FragmentWealBinding> {
 
     @Override
     public int setContentView() {
-        return R.layout.fragment_weal;
+        return R.layout.fragment_list;
     }
 
 
@@ -53,16 +53,11 @@ public class WealFragment extends BaseFragment<FragmentWealBinding> {
         viewModel.gankIoDataList.observe(this, bean -> {
             if (bean.getResults() != null) {
                 if (viewModel.isRefresh) {
-                    wealAdapter = new WealAdapter(bean.getResults());
-                    //                    wealAdapter = new wealAdapter(bean.getResults(), true);
-                    binding.rvWeal.setAdapter(wealAdapter);
+                    wealAdapter.setAdapterData(bean.getResults());
                     refreshLayout.setRefreshing(false);
                 } else {
-                    if (bean.getResults().size() > 0) {
-                        wealAdapter.updateList(bean.getResults(), true);
-                    } else {
-                        wealAdapter.updateList(null, false);
-                    }
+                    boolean flag = bean.getResults().size() > 0;
+                    wealAdapter.updateList(flag ? bean.getResults() : null, flag);
                 }
             }
         });
@@ -103,6 +98,9 @@ public class WealFragment extends BaseFragment<FragmentWealBinding> {
         binding.rvWeal.addItemDecoration(new RecyclerItemDecoration(10, 2));
         binding.rvWeal.setLayoutManager(layoutManager);
         binding.rvWeal.setItemAnimator(new DefaultItemAnimator());
+
+        wealAdapter = new WealAdapter();
+        binding.rvWeal.setAdapter(wealAdapter);
     }
 
 }

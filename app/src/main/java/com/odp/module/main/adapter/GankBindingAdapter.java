@@ -1,6 +1,6 @@
 package com.odp.module.main.adapter;
 
-import com.odp.http.GankIoDataList;
+import com.odp.bean.GankIoDataList;
 
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;

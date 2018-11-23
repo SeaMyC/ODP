@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.odp.R;
 import com.odp.databinding.ItemFragementWealBinding;
-import com.odp.http.GankIoDataBean;
-import com.odp.http.GankIoDataList;
+import com.odp.bean.GankIoDataBean;
+import com.odp.bean.GankIoDataList;
 
 import java.util.ArrayList;
 import java.util.List;

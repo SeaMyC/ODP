@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.odp.R;
 import com.odp.databinding.LayoutFootviewBinding;
-import com.odp.http.GankIoDataBean;
+import com.odp.bean.GankIoDataBean;
 
 import java.util.ArrayList;
 import java.util.List;
