@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide;
 import com.odp.R;
 import com.odp.bean.GankIoDataBean;
 import com.odp.databinding.ItemFragementAndroidBinding;
+import com.odp.module.main.inerface.IAndroidItemListener;
 import com.odp.util.storage.ODPStorageUtil;
 import com.odp.util.storage.StorageCode;
 
@@ -23,6 +24,8 @@ import androidx.recyclerview.widget.RecyclerView;
  * @des android 适配器
  **/
 public class AndroidAdapter extends BaseAdapter {
+
+    private IAndroidItemListener listener;
 
     public void setAdapterData(List<GankIoDataBean> beans) {
         datas.clear();
@@ -65,6 +68,11 @@ public class AndroidAdapter extends BaseAdapter {
                     .error(R.drawable.load_err)
                     .into(itemBinding.ivWeal);
             itemBinding.setAndroidBean((GankIoDataBean) datas.get(position));
+            itemBinding.cdItem.setOnClickListener(v -> listener.onItemClick((GankIoDataBean) datas.get(position)));
         }
+    }
+
+    public void setItemClickListener(IAndroidItemListener listener) {
+        this.listener = listener;
     }
 }

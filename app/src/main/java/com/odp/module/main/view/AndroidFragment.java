@@ -7,6 +7,7 @@ import com.odp.base.BaseFragment;
 import com.odp.databinding.FragmentListBinding;
 import com.odp.module.main.adapter.AndroidAdapter;
 import com.odp.module.main.viewmodel.AndroidViewModel;
+import com.odp.module.web.ODPWebActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -81,6 +82,10 @@ public class AndroidFragment extends BaseFragment<FragmentListBinding> {
                 // 在滑动完成后，拿到最后一个可见的item的位置
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition();
             }
+        });
+
+        androidAdapter.setItemClickListener(bean -> {
+            startActivity(new ODPWebActivity.Builder(getActivity()).putWebUrl(bean.getUrl()));
         });
     }
 
