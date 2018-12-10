@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.odp.R;
 import com.odp.base.BaseFragment;
 import com.odp.databinding.FragmentListBinding;
+import com.odp.module.image.LoadImageActivity;
 import com.odp.module.main.adapter.RecyclerItemDecoration;
 import com.odp.module.main.adapter.WealAdapter;
 import com.odp.module.main.viewmodel.WealViewModel;
@@ -105,6 +106,8 @@ public class WealFragment extends BaseFragment<FragmentListBinding> {
 
         wealAdapter = new WealAdapter();
         binding.rvWeal.setAdapter(wealAdapter);
+
+        wealAdapter.setItemClickListener(url -> startActivity(new LoadImageActivity.Builder(getActivity()).putWebUrl(url)));
     }
 
 }

@@ -5,8 +5,8 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.odp.R;
-import com.odp.databinding.ItemFragementWealBinding;
 import com.odp.bean.GankIoDataBean;
+import com.odp.databinding.ItemFragementWealBinding;
 
 import java.util.List;
 
@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
  * @des 福利 适配器
  **/
 public class WealAdapter extends BaseAdapter {
+
+    private IWealItemListener wealListener;
 
     public void setAdapterData(List<GankIoDataBean> beans) {
         datas.clear();
@@ -60,6 +62,15 @@ public class WealAdapter extends BaseAdapter {
                     .placeholder(R.drawable.img_default_meizi)
                     .error(R.drawable.load_err)
                     .into(itemBinding.ivWeal);
+            itemBinding.ivWeal.setOnClickListener(v -> wealListener.onItemListener(((GankIoDataBean) datas.get(position)).getUrl()));
         }
+    }
+
+    public void setItemClickListener(IWealItemListener listener) {
+        this.wealListener = listener;
+    }
+
+    public interface IWealItemListener {
+        void onItemListener(String str);
     }
 }

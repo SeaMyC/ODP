@@ -4,6 +4,8 @@
           package="com.odp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".base.ODPApplication"
         android:allowBackup="true"
@@ -23,6 +25,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".module.web.ODPWebActivity"/>
+        <activity
+            android:name=".module.image.LoadImageActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
