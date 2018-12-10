@@ -1,6 +1,8 @@
 package com.odp.module.main.view;
 
+import android.app.ActivityOptions;
 import android.os.Bundle;
+import android.view.View;
 
 import com.odp.R;
 import com.odp.base.BaseFragment;
@@ -107,7 +109,13 @@ public class WealFragment extends BaseFragment<FragmentListBinding> {
         wealAdapter = new WealAdapter();
         binding.rvWeal.setAdapter(wealAdapter);
 
-        wealAdapter.setItemClickListener(url -> startActivity(new LoadImageActivity.Builder(getActivity()).putWebUrl(url)));
+        wealAdapter.setItemClickListener((url, view) -> startImageActivity(url, view));
+    }
+
+    private void startImageActivity(String url, View view) {
+        startActivity(new LoadImageActivity.Builder(getActivity()).putWebUrl(url),
+                ActivityOptions.makeSceneTransitionAnimation(getActivity(), view, "girl_image").toBundle());
+
     }
 
 }

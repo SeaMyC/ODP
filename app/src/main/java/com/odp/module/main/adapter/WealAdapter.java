@@ -1,6 +1,7 @@
 package com.odp.module.main.adapter;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
@@ -62,7 +63,7 @@ public class WealAdapter extends BaseAdapter {
                     .placeholder(R.drawable.img_default_meizi)
                     .error(R.drawable.load_err)
                     .into(itemBinding.ivWeal);
-            itemBinding.ivWeal.setOnClickListener(v -> wealListener.onItemListener(((GankIoDataBean) datas.get(position)).getUrl()));
+            itemBinding.ivWeal.setOnClickListener(v -> wealListener.onItemListener(((GankIoDataBean) datas.get(position)).getUrl(),itemBinding.ivWeal));
         }
     }
 
@@ -71,6 +72,6 @@ public class WealAdapter extends BaseAdapter {
     }
 
     public interface IWealItemListener {
-        void onItemListener(String str);
+        void onItemListener(String str, View view);
     }
 }

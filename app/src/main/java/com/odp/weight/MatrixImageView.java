@@ -102,7 +102,7 @@ public class MatrixImageView extends ImageView {
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            // TODO Auto-generated method stub
+
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_DOWN:
                     //设置拖动模式
@@ -257,7 +257,7 @@ public class MatrixImageView extends ImageView {
          * @return 当前缩放级别小于模板缩放级别时，重置
          */
         private boolean checkRest() {
-            // TODO Auto-generated method stub
+
             float[] values = new float[9];
             getImageMatrix().getValues(values);
             //获取当前X轴缩放级别
@@ -326,7 +326,7 @@ public class MatrixImageView extends ImageView {
 
         @Override
         public boolean onSingleTapUp(MotionEvent e) {
-            // TODO Auto-generated method stub
+
             return super.onSingleTapUp(e);
         }
 
@@ -345,27 +345,27 @@ public class MatrixImageView extends ImageView {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                float velocityY) {
-            // TODO Auto-generated method stub
+
 
             return super.onFling(e1, e2, velocityX, velocityY);
         }
 
         @Override
         public void onShowPress(MotionEvent e) {
-            // TODO Auto-generated method stub
+
             super.onShowPress(e);
         }
 
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent e) {
-            // TODO Auto-generated method stub
+
             return super.onDoubleTapEvent(e);
         }
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            // TODO Auto-generated method stub
+
             return super.onSingleTapConfirmed(e);
         }
 

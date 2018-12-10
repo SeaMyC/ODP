@@ -11,6 +11,7 @@
             android:id="@+id/odp_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:transitionName="girl_image"
             tools:src="@mipmap/ic_launcher_round"/>
     </LinearLayout>
 </layout>
