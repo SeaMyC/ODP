@@ -1,7 +1,7 @@
 # ODP
 
 
-  ![image](https://github.com/SeaMyC/ODP/blob/master/images/odp.gif)
+  ![image](https://github.com/SeaMyC/ODP/blob/master/images/home.gif)
   
 ## 项目使用Google推荐的JetPack组件来构建
 
