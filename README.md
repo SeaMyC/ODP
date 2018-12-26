@@ -1,7 +1,8 @@
 # ODP
 
 
-  ![image](https://github.com/SeaMyC/ODP/blob/master/images/home.gif)
+ 
+  <img src="https://github.com/SeaMyC/ODP/blob/master/images/home.gif" width="300" height="300" alt="我是缩小后的图"></img>
   
 ## 项目使用Google推荐的JetPack组件来构建
 
