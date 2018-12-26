@@ -4,6 +4,7 @@ import android.view.ViewGroup;
 
 import com.odp.module.main.view.AndroidFragment;
 import com.odp.module.main.view.IOSFragment;
+import com.odp.module.main.view.SportFragment;
 import com.odp.module.main.view.WealFragment;
 
 import java.util.ArrayList;
@@ -28,16 +29,19 @@ public class TabPageAdapter extends FragmentPagerAdapter {
     public TabPageAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
         intData();
+
     }
 
     private void intData() {
         titles.clear();
-        titles.add("福利");
+        titles.add("Girl");
         titles.add("Android");
         titles.add("iOS");
+        titles.add("Sport");
         fragments.add(WealFragment.instance());
         fragments.add(AndroidFragment.instance());
-        fragments.add(IOSFragment.instance());
+        fragments.add(new IOSFragment());
+        fragments.add(new SportFragment());
 
     }
 

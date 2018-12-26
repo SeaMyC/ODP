@@ -5,7 +5,8 @@ import android.os.Bundle;
 import com.odp.R;
 import com.odp.base.BaseFragment;
 import com.odp.databinding.FragmentListBinding;
-import com.odp.module.main.adapter.AndroidAdapter;
+import com.odp.module.main.adapter.ListAdapter;
+import com.odp.module.main.adapter.SportAdapter;
 import com.odp.module.main.viewmodel.AndroidViewModel;
 import com.odp.module.web.ODPWebActivity;
 
@@ -25,7 +26,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 public class AndroidFragment extends BaseFragment<FragmentListBinding> {
     private static AndroidFragment androidFragment;
     private AndroidViewModel viewModel;
-    private AndroidAdapter androidAdapter;
+    private ListAdapter listAdapter;
     private SwipeRefreshLayout refreshLayout;
     private int lastVisibleItem;
     private LinearLayoutManager layoutManager;
@@ -53,15 +54,14 @@ public class AndroidFragment extends BaseFragment<FragmentListBinding> {
         viewModel.gankIoDataList.observe(this, bean -> {
             if (bean.getResults() != null) {
                 if (viewModel.isRefresh) {
-                    androidAdapter.setAdapterData(bean.getResults());
+                    listAdapter.setAdapterData(bean.getResults());
                     refreshLayout.setRefreshing(false);
                 } else {
                     boolean flag = bean.getResults().size() > 0;
-                    androidAdapter.updateList(flag ? bean.getResults() : null, flag);
+                    listAdapter.updateList(flag ? bean.getResults() : null, flag);
                 }
             }
         });
-
 
         binding.rvWeal.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -70,7 +70,7 @@ public class AndroidFragment extends BaseFragment<FragmentListBinding> {
                 // 在newState为滑到底部时
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     // 如果没有隐藏footView，那么最后一个条目的位置就比我们的getItemCount少1，自己可以算一下
-                    if (!androidAdapter.isFadeTips() && lastVisibleItem + 1 == androidAdapter.getItemCount()) {
+                    if (!listAdapter.isFadeTips() && lastVisibleItem + 1 == listAdapter.getItemCount()) {
                         viewModel.getGankList(false);
                     }
                 }
@@ -84,7 +84,7 @@ public class AndroidFragment extends BaseFragment<FragmentListBinding> {
             }
         });
 
-        androidAdapter.setItemClickListener(bean -> {
+        listAdapter.setItemClickListener(bean -> {
             startActivity(new ODPWebActivity.Builder(getActivity()).putWebUrl(bean.getUrl()));
         });
     }
@@ -94,7 +94,7 @@ public class AndroidFragment extends BaseFragment<FragmentListBinding> {
         refreshLayout.setColorSchemeResources(android.R.color.holo_green_light);
         refreshLayout.setOnRefreshListener(() -> {
             refreshLayout.setRefreshing(true);
-            androidAdapter.resetDatas();// 重置adapter的数据源为空
+            listAdapter.resetDatas();// 重置adapter的数据源为空
             viewModel.getGankList(true);
         });
 
@@ -102,8 +102,8 @@ public class AndroidFragment extends BaseFragment<FragmentListBinding> {
         binding.rvWeal.setLayoutManager(layoutManager);
         binding.rvWeal.setItemAnimator(new DefaultItemAnimator());
 
-        androidAdapter = new AndroidAdapter();
-        binding.rvWeal.setAdapter(androidAdapter);
+        listAdapter = new ListAdapter();
+        binding.rvWeal.setAdapter(listAdapter);
     }
 
 }

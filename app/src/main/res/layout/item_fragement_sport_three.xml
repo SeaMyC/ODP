@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odp.bean.SportBean"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cd_item"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_margin="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:elevation="5dp"
+        app:cardCornerRadius="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:paddingEnd="15dp"
+                android:text="@{viewModel.title}"
+                android:textColor="@color/Black"
+                android:textSize="16sp"
+                tools:text="你好好哈奥啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊 啊啊啊啊啊啊啊啊"/>
+
+            <LinearLayout
+                android:id="@+id/ll_iv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/iv_bg"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    tools:background="@color/colorPrimary"/>
+
+                <ImageView
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/iv_bg_two"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    tools:background="@color/colorPrimary"/>
+
+                <ImageView
+                    android:id="@+id/iv_bg_three"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    tools:background="@color/colorPrimary"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_author"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/ll_iv"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@{viewModel.author_name}"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                tools:text="hello odp "/>
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/ll_iv"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@{viewModel.date}"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                tools:text="2018-0808 19:00 "/>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

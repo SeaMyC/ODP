@@ -12,6 +12,10 @@ public enum HttpServiceClient {
     INSTANCE;
 
     public GankIOService getGankIOService() {
-        return HttpServiceFactory.INSTANCE.create(GankIOService.class, Config.HTTP_API_URL);
+        return HttpServiceFactory.INSTANCE.create(GankIOService.class, Config.HTTP_GANK_API_URL);
+    }
+
+    public SportService getSportService() {
+        return HttpServiceFactory.INSTANCE.create(SportService.class, Config.HTTP_TT_API_URL);
     }
 }

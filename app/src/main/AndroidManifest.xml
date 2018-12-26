@@ -27,6 +27,7 @@
         <activity android:name=".module.web.ODPWebActivity"/>
         <activity
             android:name=".module.image.LoadImageActivity"
+            android:hardwareAccelerated="true"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

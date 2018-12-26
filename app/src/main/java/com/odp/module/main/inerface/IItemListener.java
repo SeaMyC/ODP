@@ -7,6 +7,6 @@ import com.odp.bean.GankIoDataBean;
  * @time 2018/11/23 17:43
  * @des android 页面item的点击事件
  **/
-public interface IAndroidItemListener {
+public interface IItemListener {
     void onItemClick(GankIoDataBean bean);
 }

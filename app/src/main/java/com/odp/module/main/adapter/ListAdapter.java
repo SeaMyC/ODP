@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.odp.R;
 import com.odp.bean.GankIoDataBean;
-import com.odp.databinding.ItemFragementAndroidBinding;
-import com.odp.module.main.inerface.IAndroidItemListener;
+import com.odp.databinding.ItemFragementListBinding;
+import com.odp.module.main.inerface.IItemListener;
 import com.odp.util.storage.ODPStorageUtil;
 import com.odp.util.storage.StorageCode;
 
@@ -23,9 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
  * @time 2018/11/22 14:16
  * @des android 适配器
  **/
-public class AndroidAdapter extends BaseAdapter {
+public class ListAdapter extends BaseAdapter {
 
-    private IAndroidItemListener listener;
+    private IItemListener listener;
 
     public void setAdapterData(List<GankIoDataBean> beans) {
         datas.clear();
@@ -41,7 +41,7 @@ public class AndroidAdapter extends BaseAdapter {
     @Override
     public RecyclerView.ViewHolder setNormalHolder(ViewGroup parent, int viewType) {
         return new NormalHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                R.layout.item_fragement_android, parent, false));
+                R.layout.item_fragement_list, parent, false));
     }
 
 
@@ -52,11 +52,11 @@ public class AndroidAdapter extends BaseAdapter {
 
     class NormalHolder extends RecyclerView.ViewHolder {
 
-        private final ItemFragementAndroidBinding itemBinding;
+        private final ItemFragementListBinding itemBinding;
 
         public NormalHolder(@NonNull ViewDataBinding itemView) {
             super(itemView.getRoot());
-            this.itemBinding = (ItemFragementAndroidBinding) itemView;
+            this.itemBinding = (ItemFragementListBinding) itemView;
         }
 
         public void bindData(int position) {
@@ -72,7 +72,7 @@ public class AndroidAdapter extends BaseAdapter {
         }
     }
 
-    public void setItemClickListener(IAndroidItemListener listener) {
+    public void setItemClickListener(IItemListener listener) {
         this.listener = listener;
     }
 }

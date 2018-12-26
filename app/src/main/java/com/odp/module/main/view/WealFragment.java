@@ -52,6 +52,7 @@ public class WealFragment extends BaseFragment<FragmentListBinding> {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         viewModel = ViewModelProviders.of(this).get(WealViewModel.class);
         viewModel.getGankList(true);
         initView();
@@ -109,7 +110,7 @@ public class WealFragment extends BaseFragment<FragmentListBinding> {
         wealAdapter = new WealAdapter();
         binding.rvWeal.setAdapter(wealAdapter);
 
-        wealAdapter.setItemClickListener((url, view) -> startImageActivity(url, view));
+        wealAdapter.setItemClickListener(this::startImageActivity);
     }
 
     private void startImageActivity(String url, View view) {

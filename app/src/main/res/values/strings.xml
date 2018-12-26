@@ -2,10 +2,12 @@
     <string name="app_name">ODP</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">ODP</string>
+    <string name="nav_header_subtitle">https://github.com/SeaMyC/ODP</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+
     <string name="dialog_keep_bg_in_phone">是否保存图片到手机？</string>
     <string name="comment_sure">确定</string>
     <string name="comment_cancel">取消</string>

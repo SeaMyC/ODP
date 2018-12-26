@@ -7,12 +7,10 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.transition.Explode;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -40,12 +38,7 @@ public class LoadImageActivity extends BaseActivity<ActivityImageBinding> {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);// 允许使用transitions
         super.onCreate(savedInstanceState);
-        //进入动画
-        getWindow().setEnterTransition(new Explode().setDuration(200).setInterpolator(new AccelerateInterpolator()));
-        getWindow().setReturnTransition(new Explode().setDuration(200));
-
 
         String url = getIntent().getStringExtra(WEB_URL);
         Log.d("odp", "url:" + url);
@@ -64,10 +57,7 @@ public class LoadImageActivity extends BaseActivity<ActivityImageBinding> {
                 permissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .subscribe(granted -> {
                             if (granted) {
-//                                FileUtil.saveBmp2Gallery(LoadImageActivity.this,
-//                                        getBitmap(binding.odpIv),
-//                                        "girl");
-                                FileUtil.saveCroppedImage(LoadImageActivity.this,getBitmap(binding.odpIv));
+                                FileUtil.saveCroppedImage(LoadImageActivity.this, getBitmap(binding.odpIv));
                             } else {
                                 Toast.makeText(LoadImageActivity.this, "保存图片需要权限喔~", Toast.LENGTH_SHORT).show();
                             }
