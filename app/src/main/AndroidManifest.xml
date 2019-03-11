@@ -8,12 +8,14 @@
 
     <application
         android:name=".base.ODPApplication"
+
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
         <activity
             android:name=".module.main.MainActivity"
             android:label="@string/app_name"
@@ -29,6 +31,7 @@
             android:name=".module.image.LoadImageActivity"
             android:hardwareAccelerated="true"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".module.video.VideoActivity"/>
     </application>
 
 </manifest>

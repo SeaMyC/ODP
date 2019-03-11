@@ -8,7 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.odp.R
-import com.odp.bean.SportList
+import com.odp.bean.SportBean
 import com.odp.databinding.ItemFragementSportBinding
 import com.odp.databinding.ItemFragementSportThreeBinding
 import com.odp.module.main.inerface.ISportItemListener
@@ -21,20 +21,23 @@ import com.odp.module.main.inerface.ISportItemListener
 class SportAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var listener: ISportItemListener
 
-    var sportList: SportList = SportList()
+    var sportList = arrayListOf<SportBean>()
 
-    val ONE_IMAGE: Int = 0
+    private val ONE_IMAGE: Int = 0
 
-    val THREE_IMAGE: Int = 1
+    private val THREE_IMAGE: Int = 1
 
-    fun setData(list: SportList) {
-        sportList = list
+    fun setData(list: List<SportBean>) {
+        if (sportList.size > 0) {
+            sportList.clear()
+        }
+        sportList.addAll(list)
         notifyDataSetChanged()
     }
 
     override fun getItemViewType(position: Int): Int {
         return when {
-            sportList.result.data[position].thumbnail_pic_s02.isEmpty() -> ONE_IMAGE
+            sportList[position].thumbnail_pic_s02.isEmpty() -> ONE_IMAGE
             else -> THREE_IMAGE
         }
     }
@@ -55,7 +58,7 @@ class SportAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    override fun getItemCount(): Int = sportList.result.data.size
+    override fun getItemCount(): Int = sportList.size
 
     fun onItemOnclickListener(listener: ISportItemListener) {
         this.listener = listener
@@ -66,13 +69,13 @@ class SportAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val binding = binding as ItemFragementSportBinding
 
         fun bindData(position: Int) {
-            binding.viewModel = sportList.result.data[position]
+            binding.viewModel = sportList[position]
             Glide.with(binding.root.context)
-                    .load(sportList.result.data[position].thumbnail_pic_s)
+                    .load(sportList[position].thumbnail_pic_s)
                     .placeholder(R.drawable.img_default_meizi)
                     .error(R.drawable.load_err)
                     .into(binding.ivBg)
-            binding.cdItem.setOnClickListener { listener.OnItemClick(sportList.result.data[position]) }
+            binding.cdItem.setOnClickListener { listener.OnItemClick(sportList[position]) }
         }
     }
 
@@ -80,22 +83,22 @@ class SportAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val binding = binding as ItemFragementSportThreeBinding
 
         fun bindImageData(position: Int) {
-            binding.viewModel = sportList.result.data[position]
-            binding.cdItem.setOnClickListener { listener.OnItemClick(sportList.result.data[position]) }
+            binding.viewModel = sportList[position]
+            binding.cdItem.setOnClickListener { listener.OnItemClick(sportList[position]) }
             Glide.with(binding.root.context)
-                    .load(sportList.result.data[position].thumbnail_pic_s)
+                    .load(sportList[position].thumbnail_pic_s)
                     .placeholder(R.drawable.img_default_meizi)
                     .error(R.drawable.load_err)
                     .into(binding.ivBg)
 
             Glide.with(binding.root.context)
-                    .load(sportList.result.data[position].thumbnail_pic_s02)
+                    .load(sportList[position].thumbnail_pic_s02)
                     .placeholder(R.drawable.img_default_meizi)
                     .error(R.drawable.load_err)
                     .into(binding.ivBgTwo)
 
             Glide.with(binding.root.context)
-                    .load(sportList.result.data[position].thumbnail_pic_s03)
+                    .load(sportList[position].thumbnail_pic_s03)
                     .placeholder(R.drawable.img_default_meizi)
                     .error(R.drawable.load_err)
                     .into(binding.ivBgThree)

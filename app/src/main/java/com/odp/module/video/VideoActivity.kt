@@ -1,4 +1,4 @@
-package com.odp.module.main.view
+package com.odp.module.video
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
@@ -7,36 +7,34 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.odp.R
-import com.odp.base.BaseFragment
+import com.odp.base.BaseActivity
 import com.odp.bean.GankIoDataList
-import com.odp.databinding.FragmentIosBinding
-import com.odp.module.main.adapter.ListAdapter
-import com.odp.module.main.viewmodel.IOSViewModel
-import com.odp.module.web.ODPWebActivity
+import com.odp.databinding.ActivityVideoBinding
+import com.odp.module.video.adapter.VideoAdapter
+import com.odp.module.video.viewmodel.VideoViewModel
 
 /**
  * @author  ChenHh
- * @time   2018/12/10 15:19
- * @des  ios页面
+ * @time   2018/12/29 15:34
+ * @des  video 页面
  **/
-class IOSFragment : BaseFragment<FragmentIosBinding>() {
+class VideoActivity : BaseActivity<ActivityVideoBinding>() {
 
-    private var layoutManager: LinearLayoutManager = LinearLayoutManager(activity)
+    private var layoutManager: LinearLayoutManager = LinearLayoutManager(this)
     private var lastVisibleItem: Int = 0
-    private var listAdapter: ListAdapter = ListAdapter()
-    private lateinit var viewModel: IOSViewModel
+    private var listAdapter: VideoAdapter = VideoAdapter()
+    private lateinit var viewModel: VideoViewModel
 
-    override fun setContentView(): Int {
-        return R.layout.fragment_ios
+    override fun getLayout(): Int {
+        return R.layout.activity_video
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(IOSViewModel::class.java)
-        viewModel.getGankList(true)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(VideoViewModel::class.java)
+        viewModel.getVideoList(true)
         initView()
-
-        viewModel.gankIoDataList.observe(this, Observer<GankIoDataList> { bean ->
+        viewModel.videoList.observe(this, Observer<GankIoDataList>{ bean ->
             if (bean.results != null && bean.results.size > 0) {
                 if (viewModel.isRefresh) {
                     listAdapter.setAdapterData(bean.results)
@@ -48,14 +46,14 @@ class IOSFragment : BaseFragment<FragmentIosBinding>() {
             }
         })
 
-        binding.rvWeal.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.rvVideo.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 // 在newState为滑到底部时
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     // 如果没有隐藏footView，那么最后一个条目的位置就比我们的getItemCount少1，自己可以算一下
                     if (!listAdapter.isFadeTips && lastVisibleItem + 1 == listAdapter.itemCount) {
-                        viewModel.getGankList(false)
+                        viewModel.getVideoList(false)
                     }
                 }
             }
@@ -66,8 +64,6 @@ class IOSFragment : BaseFragment<FragmentIosBinding>() {
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition()
             }
         })
-
-        listAdapter.setItemClickListener { bean -> startActivity(ODPWebActivity.Builder(activity).putWebUrl(bean.url)) }
     }
 
     private fun initView() {
@@ -75,10 +71,10 @@ class IOSFragment : BaseFragment<FragmentIosBinding>() {
         binding.rflRefresh.setOnRefreshListener {
             binding.rflRefresh.isRefreshing = true
             listAdapter.resetDatas()// 重置adapter的数据源为空
-            viewModel.getGankList(true)
+            viewModel.getVideoList(true)
         }
-        binding.rvWeal.layoutManager = layoutManager
-        binding.rvWeal.itemAnimator = DefaultItemAnimator()
-        binding.rvWeal.adapter = listAdapter
+        binding.rvVideo.layoutManager = layoutManager
+        binding.rvVideo.itemAnimator = DefaultItemAnimator()
+        binding.rvVideo.adapter = listAdapter
     }
 }

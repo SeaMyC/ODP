@@ -22,7 +22,7 @@ import com.odp.module.web.ODPWebActivity
  **/
 class SportFragment : BaseFragment<FragmentSportBinding>() {
     private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var sportAdapter: SportAdapter
+    private  var sportAdapter = SportAdapter()
     private lateinit var viewModel: SportViewModel
 
     override fun setContentView(): Int {
@@ -36,7 +36,7 @@ class SportFragment : BaseFragment<FragmentSportBinding>() {
         viewModel.getSportData()
         initView()
         viewModel.sportList.observe(this, Observer<SportList> { bean ->
-            sportAdapter.setData(bean)
+            sportAdapter.setData(bean.result.data)
             binding.rflRefresh.isRefreshing = false
         })
 
@@ -55,7 +55,6 @@ class SportFragment : BaseFragment<FragmentSportBinding>() {
         layoutManager = LinearLayoutManager(context)
         binding.rvSport.layoutManager = layoutManager
         binding.rvSport.itemAnimator = DefaultItemAnimator()
-        sportAdapter = SportAdapter()
         binding.rvSport.adapter = sportAdapter
     }
 }

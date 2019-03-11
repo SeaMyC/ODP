@@ -57,7 +57,7 @@ public class WealFragment extends BaseFragment<FragmentListBinding> {
         viewModel.getGankList(true);
         initView();
         viewModel.gankIoDataList.observe(this, bean -> {
-            if (bean.getResults() != null) {
+            if (bean.getResults() != null && bean.getResults().size() > 0) {
                 if (viewModel.isRefresh) {
                     //存起来 用于其他页面图片无资源时占位
                     ODPStorageUtil.getDefault().push(StorageCode.Odp.ERROR_IMAGE_URL, bean.getResults().get(0).getUrl());

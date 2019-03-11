@@ -6,7 +6,6 @@ import com.odp.R;
 import com.odp.base.BaseFragment;
 import com.odp.databinding.FragmentListBinding;
 import com.odp.module.main.adapter.ListAdapter;
-import com.odp.module.main.adapter.SportAdapter;
 import com.odp.module.main.viewmodel.AndroidViewModel;
 import com.odp.module.web.ODPWebActivity;
 
@@ -62,6 +61,7 @@ public class AndroidFragment extends BaseFragment<FragmentListBinding> {
                 }
             }
         });
+
 
         binding.rvWeal.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

@@ -21,7 +21,7 @@ public enum ODPOkHttpClientBuilder {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cookieJar(new JavaNetCookieJar(CookieManager.getDefault()))
                 .readTimeout(60000, TimeUnit.MILLISECONDS)
-                .connectTimeout(3000, TimeUnit.MILLISECONDS)
+                .connectTimeout(4000, TimeUnit.MILLISECONDS)
                 .addInterceptor(new ODPHeaderInterceptor());
         if (Config.DEBUG) {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

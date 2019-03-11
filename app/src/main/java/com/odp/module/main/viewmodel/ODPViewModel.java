@@ -35,7 +35,7 @@ public abstract class ODPViewModel extends ViewModel {
             page = 1;
         } else {
             prePage += COUNT;
-            page += COUNT;
+            page += 1;
         }
         wealDisposable = HttpServiceClient.INSTANCE.getGankIOService()
                 .getGankIoData(getDataType(), prePage, page)

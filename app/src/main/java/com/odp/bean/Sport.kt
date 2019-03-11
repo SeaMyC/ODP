@@ -7,5 +7,5 @@ package com.odp.bean
  **/
 class Sport {
     var stat: String = ""
-    var data: List<SportBean> = ArrayList<SportBean>()
+    var data: List<SportBean> = ArrayList()
 }

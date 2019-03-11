@@ -64,6 +64,8 @@ dependencies {
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-2'
 }
 repositories {
     mavenCentral()

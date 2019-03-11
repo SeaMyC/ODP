@@ -1,9 +1,12 @@
 package com.odp.module.main;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -11,7 +14,10 @@ import com.google.android.material.tabs.TabLayout;
 import com.odp.R;
 import com.odp.databinding.ActivityMainBinding;
 import com.odp.module.main.adapter.TabPageAdapter;
+import com.odp.module.video.VideoActivity;
+import com.odp.util.ToastUtils;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -54,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
 
-        binding.appBarMain.fab.setOnClickListener(v -> Snackbar.make(v, "Replace with your own action",
+        binding.appBarMain.fab.setOnClickListener(v -> Snackbar.make(v, "author email:   365919006@qq.com",
                 Snackbar.LENGTH_LONG).setAction("Action",
                 null).show());
 
@@ -76,48 +82,34 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("WrongConstant")
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        TextView tv = new TextView(this);
+        tv.setTextColor(getColor(R.color.white));
+        tv.setBackgroundColor(getColor(R.color.gray));
         int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (id) {
+            case R.id.nav_video:
+                startActivity(new Intent(this, VideoActivity.class));
+                break;
+            case R.id.nav_version:
+                try {
+                    String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+                    tv.setText(String.valueOf("version: " + versionName));
+                    new ToastUtils(this, tv, 200).show();
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.nav_author:
+                tv.setText(String.valueOf("author: ODP"));
+                new ToastUtils(this, tv, 200).show();
+                break;
         }
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

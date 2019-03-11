@@ -21,4 +21,13 @@ public interface GankIOService {
      */
     @GET("data/{type}/{pre_page}/{page}")
     Observable<GankIoDataList> getGankIoData(@Path("type") String id, @Path("pre_page") int pre_page, @Path("page") int page);
+
+    /**
+     * 获取视频数据
+     * @param count 条数
+     * @param page  开始index
+     * @return video data
+     */
+    @GET("search/query/listview/category/休息视频/count/{count}/page/{page}")
+    Observable<GankIoDataList> getVideoData( @Path("count") int count, @Path("page") int page);
 }
