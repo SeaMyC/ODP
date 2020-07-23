@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.odp.R;
 import com.odp.databinding.LayoutFootviewBinding;
-import com.odp.bean.GankIoDataBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +24,8 @@ import androidx.recyclerview.widget.RecyclerView;
  * @time 2018/11/16 15:36
  * @des odpAdapter
  **/
-public abstract class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public List datas = new ArrayList(); // 数据源
+public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public List<T> datas = new ArrayList<>(); // 数据源
     private int normalType = 0;     // 第一种ViewType，正常的item
     private int footType = 1;       // 第二种ViewType，底部的提示View
 
@@ -53,8 +52,9 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+
     // // 底部footView的ViewHolder，用以缓存findView操作
-    class FootHolder extends RecyclerView.ViewHolder {
+    public class FootHolder extends RecyclerView.ViewHolder {
 
         private final LayoutFootviewBinding itemBinding;
         private TextView tips;
@@ -80,23 +80,23 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder( RecyclerView.ViewHolder holder, int position) {
         // 如果是正常的imte，直接设置TextView的值
-        if (holder instanceof FootHolder) {
+        if (holder instanceof BaseAdapter.FootHolder) {
             // 之所以要设置可见，是因为我在没有更多数据时会隐藏了这个footView
-            ((FootHolder) holder).tips.setVisibility(View.VISIBLE);
+            ((BaseAdapter.FootHolder) holder).tips.setVisibility(View.VISIBLE);
             // 只有获取数据为空时，hasMore为false，所以当我们拉到底部时基本都会首先显示“正在加载更多...”
             if (hasMore) {
                 // 不隐藏footView提示
                 fadeTips = false;
                 if (datas.size() > 0) {
-                    ((FootHolder) holder).tips.setText("加载更多数据...");
+                    ((BaseAdapter.FootHolder) holder).tips.setText("加载更多数据...");
                 }
             } else {
                 if (datas.size() > 0) {
                     Toast.makeText(context, "无更多数据了喔~", Toast.LENGTH_SHORT).show();
-                    ((FootHolder) holder).tips.setText("无更多数据了喔~");
-                    ((FootHolder) holder).tips.setVisibility(View.VISIBLE);
+                    ((BaseAdapter.FootHolder) holder).tips.setText("无更多数据了喔~");
+                    ((BaseAdapter.FootHolder) holder).tips.setVisibility(View.VISIBLE);
                     // 将fadeTips设置true
                     fadeTips = true;
                     // hasMore设为true是为了让再次拉到底时，会先显示正在加载更多
@@ -127,7 +127,7 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     // 暴露接口，更新数据源，并修改hasMore的值，如果有增加数据，hasMore为true，否则为false
-    public void updateList(List<GankIoDataBean> newDatas, boolean hasMore) {
+    public void updateList(List<T> newDatas, boolean hasMore) {
         // 在原有的数据之上增加新数据
         if (newDatas != null) {
             datas.addAll(newDatas);

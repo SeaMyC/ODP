@@ -10,6 +10,7 @@ import com.odp.base.GankTypeEnum
 class IOSViewModel : ODPViewModel() {
 
     override fun setType(): GankTypeEnum {
+
         return GankTypeEnum.IOS
     }
 }

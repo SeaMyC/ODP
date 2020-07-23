@@ -30,7 +30,7 @@ class VideoViewModel : ViewModel() {
             page = 1
         } else {
             count += count
-            page += count
+            page ++
         }
         disposable = HttpServiceClient.INSTANCE
                 .gankIOService.getVideoData(count, page)
@@ -38,7 +38,6 @@ class VideoViewModel : ViewModel() {
                 .subscribe({ bean ->
                     videoList.postValue(bean)
                 }, { error -> Logger.e(" message :%s", error.message) })
-
 
     }
 

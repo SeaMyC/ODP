@@ -1,6 +1,7 @@
 package com.odp.module.video.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -16,13 +17,20 @@ import com.odp.module.main.inerface.IItemListener
  * @time   2018/12/29 16:40
  * @des  video适配器
  **/
-class VideoAdapter : BaseAdapter() {
+class VideoAdapter : BaseAdapter<GankIoDataBean>() {
     private var listener: IItemListener? = null
+
+    private var index: Int = 0
 
     fun setAdapterData(beans: List<GankIoDataBean>) {
         datas.clear()
         datas = beans
         notifyDataSetChanged()
+    }
+
+    fun setVideoPlay(position: Int) {
+        index = position
+
     }
 
     override fun getODPItemCount(): Int {
@@ -36,19 +44,24 @@ class VideoAdapter : BaseAdapter() {
 
 
     override fun onBindNormalViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as NormalHolder).bindData(position)
+        (holder as NormalHolder).bindData()
     }
 
     internal inner class NormalHolder(itemView: ViewDataBinding) : RecyclerView.ViewHolder(itemView.root) {
 
         private val itemBinding: ItemVideoListBinding = itemView as ItemVideoListBinding
 
-        fun bindData(position: Int) {
-            val bean = datas.get(position) as GankIoDataBean
+        fun bindData() {
+//            val bean = datas[position] as GankIoDataBean
             itemBinding.vvVideo.setVideoPath("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
-            itemBinding.vvVideo.requestFocus()
-            if (position == 1) {
-                itemBinding.vvVideo.start()
+//            itemBinding.vvVideo.setMediaController(MediaController(itemBinding.root.context))
+//            itemBinding.vvVideo.pause()
+
+            itemBinding.ivPlay.setOnClickListener {
+                if (!itemBinding.vvVideo.isPlaying) {
+                    itemBinding.vvVideo.start()
+                    itemBinding.ivPlay.visibility = View.GONE
+                }
             }
         }
     }

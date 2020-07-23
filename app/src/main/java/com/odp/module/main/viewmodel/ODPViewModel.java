@@ -18,7 +18,6 @@ import io.reactivex.disposables.Disposable;
 public abstract class ODPViewModel extends ViewModel {
     public MediatorLiveData<GankIoDataList> gankIoDataList = new MediatorLiveData<>();
     private Disposable wealDisposable;
-    private static final int COUNT = 10;
     private static int prePage = 10;
     private static int page = 1;
     public boolean isRefresh = false;
@@ -31,10 +30,8 @@ public abstract class ODPViewModel extends ViewModel {
 
         isRefresh = refresh;
         if (refresh) {
-            prePage = 10;
             page = 1;
         } else {
-            prePage += COUNT;
             page += 1;
         }
         wealDisposable = HttpServiceClient.INSTANCE.getGankIOService()
@@ -42,6 +39,8 @@ public abstract class ODPViewModel extends ViewModel {
                 .compose(RxSchedulerHelper.iOThreadScheduler())
                 .subscribe(data -> gankIoDataList.postValue(data),
                         e -> Logger.e(" message :%s", e.getMessage()));
+
+
     }
 
     private String getDataType() {

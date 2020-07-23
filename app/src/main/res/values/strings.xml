@@ -11,4 +11,9 @@
     <string name="dialog_keep_bg_in_phone">是否保存图片到手机？</string>
     <string name="comment_sure">确定</string>
     <string name="comment_cancel">取消</string>
+    <string name="user_header_logo">头像</string>
+    <string name="user_name">昵称</string>
+    <string name="user_email">邮箱地址</string>
+    <string name="user_more">更多</string>
+    <string name="user_location">我的地址</string>
 </resources>

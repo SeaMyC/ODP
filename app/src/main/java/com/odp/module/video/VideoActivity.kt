@@ -42,6 +42,7 @@ class VideoActivity : BaseActivity<ActivityVideoBinding>() {
                 } else {
                     val flag = bean.results.size > 0
                     listAdapter.updateList(if (flag) bean.results else null, flag)
+
                 }
             }
         })
@@ -51,6 +52,11 @@ class VideoActivity : BaseActivity<ActivityVideoBinding>() {
                 super.onScrollStateChanged(recyclerView, newState)
                 // 在newState为滑到底部时
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    //停止滚动的时候获取当前position
+                    val seePosition = layoutManager.findFirstCompletelyVisibleItemPosition()
+                    listAdapter.setVideoPlay(seePosition)
+
+
                     // 如果没有隐藏footView，那么最后一个条目的位置就比我们的getItemCount少1，自己可以算一下
                     if (!listAdapter.isFadeTips && lastVisibleItem + 1 == listAdapter.itemCount) {
                         viewModel.getVideoList(false)
@@ -76,5 +82,6 @@ class VideoActivity : BaseActivity<ActivityVideoBinding>() {
         binding.rvVideo.layoutManager = layoutManager
         binding.rvVideo.itemAnimator = DefaultItemAnimator()
         binding.rvVideo.adapter = listAdapter
+
     }
 }

@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.odp.R;
 import com.odp.databinding.ActivityMainBinding;
 import com.odp.module.main.adapter.TabPageAdapter;
+import com.odp.module.user.UserActivity;
 import com.odp.module.video.VideoActivity;
 import com.odp.util.ToastUtils;
 
@@ -105,8 +106,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 break;
             case R.id.nav_author:
-                tv.setText(String.valueOf("author: ODP"));
-                new ToastUtils(this, tv, 200).show();
+                startActivity(new Intent(this, UserActivity.class));
                 break;
         }
 

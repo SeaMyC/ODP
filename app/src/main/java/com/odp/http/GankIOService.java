@@ -1,8 +1,10 @@
 package com.odp.http;
 
+
 import com.odp.bean.GankIoDataList;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -24,10 +26,15 @@ public interface GankIOService {
 
     /**
      * 获取视频数据
+     *
      * @param count 条数
      * @param page  开始index
      * @return video data
      */
     @GET("search/query/listview/category/休息视频/count/{count}/page/{page}")
-    Observable<GankIoDataList> getVideoData( @Path("count") int count, @Path("page") int page);
+    Observable<GankIoDataList> getVideoData(@Path("count") int count, @Path("page") int page);
+
+    @GET("search/query/listview/category/休息视频/count/{count}/page/{page}")
+    Call<GankIoDataList> callTest(@Path("count") int count, @Path("page") int page);
+
 }

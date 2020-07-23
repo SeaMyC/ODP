@@ -23,14 +23,16 @@ import androidx.recyclerview.widget.RecyclerView;
  * @time 2018/11/22 14:16
  * @des android 适配器
  **/
-public class ListAdapter extends BaseAdapter {
+public class ListAdapter extends BaseAdapter<GankIoDataBean> {
 
     private IItemListener listener;
 
     public void setAdapterData(List<GankIoDataBean> beans) {
-        datas.clear();
-        datas = beans;
-        notifyDataSetChanged();
+        if(beans.size()>0) {
+            datas.clear();
+            datas.addAll( beans);
+            notifyDataSetChanged();
+        }
     }
 
     @Override
