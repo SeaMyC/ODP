@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.dfg.anfield.dev",
+    "sha256_cert_fingerprints":
+    ["50:FE:CC:64:A4:36:C9:B7:A3:D3:14:76:61:87:6C:45:40:DA:68:25:9F:7F:52:D5:65:B4:F6:F3:42:AD:3F:58"]
+  }
+}]
